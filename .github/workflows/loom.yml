@@ -27,7 +27,7 @@ jobs:
     name: loom tokio::runtime::spawn_blocking
     # base_ref is null when it's not a pull request
     if: github.repository_owner == 'tokio-rs' && (contains(github.event.pull_request.labels.*.name, 'R-loom-blocking') || (github.base_ref == null))
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -43,7 +43,7 @@ jobs:
     name: loom tokio::sync
     # base_ref is null when it's not a pull request
     if: github.repository_owner == 'tokio-rs' && (contains(github.event.pull_request.labels.*.name, 'R-loom-sync') || (github.base_ref == null))
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -59,7 +59,7 @@ jobs:
     name: loom time driver
     # base_ref is null when it's not a pull request
     if: github.repository_owner == 'tokio-rs' && (contains(github.event.pull_request.labels.*.name, 'R-loom-time-driver') || (github.base_ref == null))
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -75,7 +75,7 @@ jobs:
     name: loom current-thread scheduler
     # base_ref is null when it's not a pull request
     if: github.repository_owner == 'tokio-rs' && (contains(github.event.pull_request.labels.*.name, 'R-loom-current-thread') || (github.base_ref == null))
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -91,7 +91,7 @@ jobs:
     name: loom multi-thread scheduler
     # base_ref is null when it's not a pull request
     if: github.repository_owner == 'tokio-rs' && (contains(github.event.pull_request.labels.*.name, 'R-loom-multi-thread') || (github.base_ref == null))
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     strategy:
       matrix:
         include:
@@ -116,7 +116,7 @@ jobs:
     name: loom tokio-util
     # base_ref is null when it's not a pull request
     if: github.repository_owner == 'tokio-rs' && (contains(github.event.pull_request.labels.*.name, 'R-loom-util') || (github.base_ref == null))
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}

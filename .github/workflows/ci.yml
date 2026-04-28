@@ -44,7 +44,7 @@ jobs:
   # Basic actions that must pass before we kick off more expensive tests.
   basics:
     name: basic checks
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     needs:
       - clippy
       - fmt
@@ -61,7 +61,7 @@ jobs:
       matrix:
         os:
           - windows-latest
-          - ubuntu-latest
+          - monkci-ubuntu-24.04-2
           - macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -93,7 +93,7 @@ jobs:
       matrix:
         os:
           - windows-latest
-          - ubuntu-latest
+          - monkci-ubuntu-24.04-2
           - macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -132,7 +132,7 @@ jobs:
       matrix:
         os:
           - windows-latest
-          - ubuntu-latest
+          - monkci-ubuntu-24.04-2
           - macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -165,7 +165,7 @@ jobs:
       matrix:
         os:
           - windows-latest
-          - ubuntu-latest
+          - monkci-ubuntu-24.04-2
           - macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -206,7 +206,7 @@ jobs:
     # `tokio/tokio/tests/async_send_sync.rs`.
     name: compile tests with parking lot send guards
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -232,7 +232,7 @@ jobs:
   valgrind:
     name: valgrind
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -270,9 +270,9 @@ jobs:
       matrix:
         include:
           - { os: windows-latest, extra_features: "" }
-          - { os: ubuntu-latest, extra_features: "" }
+          - { os: monkci-ubuntu-24.04-2, extra_features: "" }
           # only Linux supports io_uring
-          - { os: ubuntu-latest, extra_features: io-uring }
+          - { os: monkci-ubuntu-24.04-2, extra_features: io-uring }
           - { os: macos-latest, extra_features: "" }
     steps:
       - uses: actions/checkout@v6
@@ -307,7 +307,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
+          - os: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -341,7 +341,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
+          - os: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -370,7 +370,7 @@ jobs:
   miri-lib:
     name: miri-lib
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_miri_nightly }}
@@ -393,7 +393,7 @@ jobs:
   miri-test:
     name: miri-test
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_miri_nightly }}
@@ -416,7 +416,7 @@ jobs:
   miri-doc:
     name: miri-doc
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_miri_nightly }}
@@ -435,7 +435,7 @@ jobs:
   asan:
     name: asan
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install llvm
@@ -457,7 +457,7 @@ jobs:
   semver:
     name: semver
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Check `tokio` semver
@@ -480,7 +480,7 @@ jobs:
   cross-check:
     name: cross-check
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     strategy:
       matrix:
         target:
@@ -504,7 +504,7 @@ jobs:
   cross-check-tier3:
     name: cross-check-tier3
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     strategy:
       matrix:
         target:
@@ -535,10 +535,10 @@ jobs:
       matrix:
         include:
           - target: i686-unknown-linux-gnu
-            os: ubuntu-latest
+            os: monkci-ubuntu-24.04-2
             extra_features: "taskdump"
           - target: armv5te-unknown-linux-gnueabi
-            os: ubuntu-latest
+            os: monkci-ubuntu-24.04-2
           - target: armv7-unknown-linux-gnueabihf
             os: ubuntu-24.04-arm
           - target: aarch64-unknown-linux-gnu
@@ -585,10 +585,10 @@ jobs:
       matrix:
         include:
           - target: i686-unknown-linux-gnu
-            os: ubuntu-latest
+            os: monkci-ubuntu-24.04-2
             extra_features: "taskdump"
           - target: armv5te-unknown-linux-gnueabi
-            os: ubuntu-latest
+            os: monkci-ubuntu-24.04-2
           - target: armv7-unknown-linux-gnueabihf
             os: ubuntu-24.04-arm
           - target: aarch64-unknown-linux-gnu
@@ -636,7 +636,7 @@ jobs:
   no-atomic-u64-test:
     name: Test tokio --all-features on i686-unknown-linux-gnu without AtomicU64
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_nightly }}
@@ -668,7 +668,7 @@ jobs:
   no-atomic-u64-check:
     name: Check tokio --feature-powerset --depth 2 on i686-unknown-linux-gnu without AtomicU64
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_nightly }}
@@ -694,7 +694,7 @@ jobs:
   features:
     name: features exclude ${{ matrix.name }}
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     strategy:
       matrix:
         include:
@@ -725,7 +725,7 @@ jobs:
 
   minrust:
     name: minrust
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_min }}
@@ -754,7 +754,7 @@ jobs:
   minimal-versions:
     name: minimal-versions
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_nightly }}
@@ -787,7 +787,7 @@ jobs:
 
   fmt:
     name: fmt
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -807,7 +807,7 @@ jobs:
 
   clippy:
     name: clippy
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_clippy }}
@@ -845,7 +845,7 @@ jobs:
         run:
           - os: windows-latest
             extra_features: "tracing"
-          - os: ubuntu-latest
+          - os: monkci-ubuntu-24.04-2
             extra_features: "tracing,io-uring,taskdump"
 
     steps:
@@ -864,7 +864,7 @@ jobs:
   loom-compile:
     name: build loom tests
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -880,7 +880,7 @@ jobs:
 
   check-readme:
     name: Check README
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Verify that both READMEs are identical
@@ -898,7 +898,7 @@ jobs:
       matrix:
         os:
           - windows-latest
-          - ubuntu-latest
+          - monkci-ubuntu-24.04-2
           - macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -950,7 +950,7 @@ jobs:
       matrix:
         os:
           - windows-latest
-          - ubuntu-latest
+          - monkci-ubuntu-24.04-2
           - macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -995,7 +995,7 @@ jobs:
   x86_64-fortanix-unknown-sgx:
     name: build tokio for x86_64-fortanix-unknown-sgx
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_nightly }}
@@ -1012,7 +1012,7 @@ jobs:
   check-redox:
     name: build tokio for redox-os
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_nightly }}
@@ -1027,7 +1027,7 @@ jobs:
   wasm32-unknown-unknown:
     name: test tokio for wasm32-unknown-unknown (${{ matrix.name }})
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     strategy:
       matrix:
         include:
@@ -1054,7 +1054,7 @@ jobs:
   wasm32-wasip1:
     name: ${{ matrix.target }}
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     strategy:
       matrix:
         target:
@@ -1119,7 +1119,7 @@ jobs:
 
   wasm32-wasip2:
     name: test tokio for wasm32-wasip2
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
@@ -1153,7 +1153,7 @@ jobs:
           - os: windows-latest
             # Windows neither supports io-uring nor taskdump.
             extra_features: "tracing"
-          - os: ubuntu-latest
+          - os: monkci-ubuntu-24.04-2
             # includes all unstable features.
             extra_features: "tracing,io-uring,taskdump"
     steps:
@@ -1179,7 +1179,7 @@ jobs:
   check-fuzzing:
     name: check-fuzzing
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_nightly }}
@@ -1199,7 +1199,7 @@ jobs:
   check-spelling:
     name: check-spelling
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust ${{ env.rust_stable }}
@@ -1269,7 +1269,7 @@ jobs:
           fi
 
   get-latest-kernel-version:
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     outputs:
       kernel_version: ${{ steps.fetch.outputs.kernel_version }}
     steps:
@@ -1296,7 +1296,7 @@ jobs:
   freebsd-x86_64:
     name: FreeBSD x86_64
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Test in FreeBSD
@@ -1321,7 +1321,7 @@ jobs:
   freebsd-docs:
     name: FreeBSD docs
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Test in FreeBSD
@@ -1348,7 +1348,7 @@ jobs:
   freebsd-i686:
     name: FreeBSD i686
     needs: basics
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-2
     steps:
       - uses: actions/checkout@v6
       - name: Test in FreeBSD
